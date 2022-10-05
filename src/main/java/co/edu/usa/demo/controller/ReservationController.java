@@ -1,8 +1,8 @@
 
 package co.edu.usa.demo.controller;
 
-import co.edu.usa.demo.entities.Product;
-import co.edu.usa.demo.service.ProductService;
+import co.edu.usa.demo.entities.Reservation;
+import co.edu.usa.demo.service.ReservationService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,19 +14,21 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/Product")
-public class ProductController {
+@RequestMapping("/api/Reservation")
+public class ReservationController {
     
     @Autowired
-    private ProductService productService;
+    private ReservationService reservationService;
     
     @GetMapping("/all")
-    public List<Product> getAll(){
-        return productService.getAll();
+    public List<Reservation> getAll(){
+        return reservationService.getAll();
     }
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Product save(@RequestBody Product p){
-        return productService.save(p);
+    public Reservation save(@RequestBody Reservation p){
+        return reservationService.save(p);
     }
+    
+    
 }

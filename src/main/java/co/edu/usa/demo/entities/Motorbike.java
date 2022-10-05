@@ -3,34 +3,31 @@ package co.edu.usa.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "category")
-public class Category implements Serializable {
+@Table (name = "motorbike")
+public class Motorbike implements Serializable {
     
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private String brand;
+    private Integer year;
     private String description;
     
-    
-    
-    @OneToMany (cascade = {CascadeType.PERSIST},mappedBy ="category")
-    @JsonIgnoreProperties("category")
-    private List<Motorbike> motorbikes;
-    
-    @OneToMany (cascade = {CascadeType.PERSIST},mappedBy ="category")
-    @JsonIgnoreProperties("category")
-    private List<Reservation> reservations;
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    @JsonIgnoreProperties("products")
+    private Category category;
 
     public Integer getId() {
         return id;
@@ -48,6 +45,22 @@ public class Category implements Serializable {
         this.name = name;
     }
 
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -56,15 +69,13 @@ public class Category implements Serializable {
         this.description = description;
     }
 
-    public List<Motorbike> getMotorbikes() {
-        return motorbikes;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setMotorbikes(List<Motorbike> motorbikes) {
-        this.motorbikes = motorbikes;
+    public void setCategory(Category category) {
+        this.category = category;
     }
-
    
-    
     
 }
